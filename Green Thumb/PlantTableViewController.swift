@@ -56,6 +56,8 @@ class PlantTableViewController: UIViewController {
             controller.plantDescription = plantDetail.details
             controller.plantname = plantDetail.name
             controller.plantPrice = plantDetail.price
+            
+            ClientAnalytics.sendPlantViewedEvent(itemViewed: plantDetail.name)
         }
     }
     

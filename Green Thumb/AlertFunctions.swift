@@ -41,6 +41,7 @@ class Alerts {
         do {
             print("plant name \(String(describing: gardeningFrequecy?.plantName))")
             gardeningFrequecy!.gardeningLevel = currentGardeningFrequency
+            ClientAnalytics.sendUserPropertyGardeningAbility(gardeningExperience: (gardeningFrequecy?.gardeningLevel)!)
             print("garden frequency \(String(describing: gardeningFrequecy!.gardeningLevel))")
             try managedContext.save()
         } catch let error as NSError {

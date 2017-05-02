@@ -84,6 +84,8 @@ class PlantDetailViewController: UIViewController {
                 try managedContext.save()
             }
             
+            ClientAnalytics.sendAddToCartEvent(itemAdded: plantNameToSave)
+            
         }  catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }

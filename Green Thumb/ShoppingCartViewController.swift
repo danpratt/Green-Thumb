@@ -129,8 +129,9 @@ class ShoppingCartViewController: UIViewController {
             
             // Add plant to list of plants being purchased with the current number of plants that are being purchased
             plantsPurchased[plant.plantName!] = Int(plant.numberPlantsSaved)
-            
+            ClientAnalytics.sendPurchaseItemsAgainEvent(itemsPurchased: plantsRepeatPurchase)
             plant.numberPlantsSaved = 0
+            ClientAnalytics.sendPurchaseItemsEvent(itemsPurchased: plantsPurchased)
             
         }
         
@@ -174,6 +175,8 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         currentPlant = allSavedPlants[indexPath.item]
         guard let plantToRemove = currentPlant, editingStyle == .delete else { return }
+        
+        ClientAnalytics.removeFromCart(itemRemoved: plantToRemove.plantName!)
         
         // delete plant and refresh table
         managedContext.delete(plantToRemove)

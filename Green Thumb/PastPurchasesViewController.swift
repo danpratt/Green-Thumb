@@ -62,7 +62,7 @@ class PastPurchasesViewController: UIViewController {
     
     func buyItAgain(currentPlant: SavedPlant) {
         currentPlant.numberPlantsSaved += 1
-
+        ClientAnalytics.sendAddToCartEvent(itemAdded: currentPlant.plantName!, buyItAgain: true)
         self.performSegue(withIdentifier: checkoutSegue, sender: self)
     }
     
